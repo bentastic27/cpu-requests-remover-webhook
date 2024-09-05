@@ -19,8 +19,8 @@ spec:
       - name: cpu-requests-remover-webhook
         image: bentastic27/cpu-requests-remover-webhook:latest
         ports:
-        - containerPort: 80
-          name: http
+        - containerPort: 443
+          name: https
         args:
         - "--access-logfile=-"
         - "--log-file=-"

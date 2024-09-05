@@ -9,6 +9,6 @@ spec:
     app: cpu-requests-remover-webhook
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: http
-      name: http
+      port: 443
+      targetPort: https
+      name: https
