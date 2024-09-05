@@ -22,8 +22,8 @@ spec:
         - containerPort: 80
           name: http
         args:
-        - "--access-logfile='-'"
-        - "--log-file='-'"
+        - "--access-logfile=-"
+        - "--log-file=-"
         - "--bind=0.0.0.0:80"
         - "app:app"
         readinessProbe:
