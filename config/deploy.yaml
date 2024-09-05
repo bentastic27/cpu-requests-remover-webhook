@@ -15,31 +15,35 @@ spec:
       labels:
         app: cpu-requests-remover-webhook
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
       containers:
       - name: cpu-requests-remover-webhook
         image: bentastic27/cpu-requests-remover-webhook:latest
         ports:
-        - containerPort: 443
+        - containerPort: 8443
           name: https
         args:
         - "--access-logfile=-"
         - "--log-file=-"
         - "--certfile=/certs/tls.crt"
         - "--keyfile=/certs/tls.key"
-        - "--bind=0.0.0.0:443"
+        - "--bind=0.0.0.0:8443"
         - "app:app"
         readinessProbe:
           httpGet:
             path: /health
             scheme: HTTPS
-            port: 443
+            port: 8443
           initialDelaySeconds: 3
           periodSeconds: 5
         livenessProbe:
           httpGet:
             path: /health
             scheme: HTTPS
-            port: 443
+            port: 8443
           initialDelaySeconds: 3
         volumeMounts:
         - readOnly: true
