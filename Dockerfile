@@ -1,4 +1,4 @@
-FROM python:3.12 AS parent
+FROM python:3.12-slim AS parent
 WORKDIR /app
 RUN pip3 install pipenv
 COPY Pipfile /app/
