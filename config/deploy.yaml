@@ -24,18 +24,28 @@ spec:
         args:
         - "--access-logfile=-"
         - "--log-file=-"
-        - "--bind=0.0.0.0:80"
+        - "--certfile=/certs/tls.crt"
+        - "--keyfile=/certs/tls.key"
+        - "--bind=0.0.0.0:443"
         - "app:app"
         readinessProbe:
           httpGet:
             path: /health
             scheme: HTTP
-            port: 80
+            port: 443
           initialDelaySeconds: 3
           periodSeconds: 5
         livenessProbe:
           httpGet:
             path: /health
             scheme: HTTP
-            port: 80
+            port: 443
           initialDelaySeconds: 3
+        volumeMounts:
+        - readOnly: true
+          mountPath: /certs
+          name: certs
+      volumes:
+        - name: certs
+          secret:
+            secretName: cpu-requests-remover-webhook-cert

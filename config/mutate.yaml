@@ -2,6 +2,8 @@ kind: MutatingWebhookConfiguration
 apiVersion: admissionregistration.k8s.io/v1
 metadata:
   name: cpu-requests-remover-webhook
+  annotations:
+    cert-manager.io/inject-ca-from: cpu-requests-remover-webhook/cpu-requests-remover-webhook
 webhooks:
 - name: cpu-requests-remover-webhook.cpu-requests-remover-webhook.svc
   sideEffects: NoneOnDryRun
@@ -14,4 +16,8 @@ webhooks:
     apiVersions: ["v1"]
     resources: ["pods"]
   clientConfig:
-    url: http://cpu-requests-remover-webhook.cpu-requests-remover-webhook.svc:80/mutate
+    service:
+      namespace: cpu-requests-remover-webhook
+      name: cpu-requests-remover-webhook
+      path: /mutate
+      port: 443

@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: cpu-requests-remover-webhook
+  namespace: cpu-requests-remover-webhook
+spec:
+  secretName: cpu-requests-remover-webhook-cert
+  dnsNames:
+  - cpu-requests-remover-webhook.cpu-requests-remover-webhook
+  - cpu-requests-remover-webhook.cpu-requests-remover-webhook.svc
+  issuerRef:
+    name: selfsigned
