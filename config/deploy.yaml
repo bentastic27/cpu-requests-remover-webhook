@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cpu-requests-remover-webhook
+  namespace: cpu-requests-remover-webhook
+  labels:
+    app: cpu-requests-remover-webhook
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cpu-requests-remover-webhook
+  template:
+    metadata:
+      labels:
+        app: cpu-requests-remover-webhook
+    spec:
+      containers:
+      - name: cpu-requests-remover-webhook
+        image: bentastic27/cpu-requests-remover-webhook:latest
+        ports:
+        - containerPort: 80
+          name: http
+        args:
+        - "--bind=0.0.0.0:80"
+        - "app:app"
+        readinessProbe:
+          httpGet:
+            path: /health
+            scheme: HTTPS
+            port: 443
+          initialDelaySeconds: 3
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /health
+            scheme: HTTPS
+            port: 443
+          initialDelaySeconds: 3

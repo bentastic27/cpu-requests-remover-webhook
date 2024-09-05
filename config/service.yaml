@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cpu-requests-remover-webhook
+  namespace: cpu-requests-remover-webhook
+spec:
+  type: ClusterIP
+  selector:
+    app: cpu-requests-remover-webhook
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: http
+      name: http
