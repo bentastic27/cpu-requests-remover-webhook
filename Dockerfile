@@ -1,8 +1,4 @@
-ARG USERNAME=appuser
-ARG USER_UID=1000
-ARG USER_GID=$USER_UID
-
-FROM python:3.12 as parent
+FROM python:3.12 AS parent
 WORKDIR /app
 RUN pip3 install pipenv
 COPY Pipfile /app/
@@ -11,11 +7,11 @@ COPY Pipfile.lock /app/
 FROM parent AS base
 RUN pipenv install --deploy --system
 
-FROM base as Prod
+FROM base AS release
 COPY src /app
-RUN groupadd --gid $USER_GID $USERNAME && \
-  useradd --uid $USER_UID --gid $USER_GID -m $USERNAME -s /sbin/nologin -d /app && \
-  chown $USER_UID.$USER_GID /app
+RUN groupadd --gid 1000 appuser && \
+  useradd --uid 1000 --gid 1000 -M appuser -s /sbin/nologin -d /app && \
+  chown 1000.1000 /app
 EXPOSE 8443
 ENTRYPOINT ["gunicorn"]
 CMD ["app:app"]
