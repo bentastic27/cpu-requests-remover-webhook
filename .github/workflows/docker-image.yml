@@ -27,4 +27,4 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: bentastic/cpu-requests-remover-webhook:$(date +%s)
+          tags: bentastic/cpu-requests-remover-webhook:%{{ github.sha }}
