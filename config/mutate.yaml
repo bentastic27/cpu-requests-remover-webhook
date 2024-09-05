@@ -5,7 +5,8 @@ metadata:
 webhooks:
 - name: cpu-requests-remover-webhook.cpu-requests-remover-webhook.svc
   sideEffects: NoneOnDryRun
-  admissionReviewVersions: v1
+  admissionReviewVersions:
+  - v1
   rules:
   - operations: ["CREATE", "UPDATE"]
     apiGroups: ["*"]
