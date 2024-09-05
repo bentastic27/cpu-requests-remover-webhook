@@ -34,7 +34,7 @@ def mutate():
         "allowed": True,
         "uid": request.json["request"]["uid"],
         "patch": base64.b64encode(str(patch).encode()).decode(),
-        "patchtype": "JSONPatch",
+        "patchType": "JSONPatch",
       }
     }
   )
