@@ -13,4 +13,5 @@ webhooks:
     apiGroups: ["*"]
     apiVersions: ["v1"]
     resources: ["pods"]
-  url: http://cpu-requests-remover-webhook.cpu-requests-remover-webhook.svc:80/mutate
+  clientConfig:
+    url: http://cpu-requests-remover-webhook.cpu-requests-remover-webhook.svc:80/mutate
