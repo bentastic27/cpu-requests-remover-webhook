@@ -13,9 +13,4 @@ webhooks:
     apiGroups: ["*"]
     apiVersions: ["v1"]
     resources: ["pods"]
-  clientConfig:
-    service:
-      namespace: cpu-requests-remover-webhook
-      name: cpu-requests-remover-webhook
-      path: /mutate
-      port: 80
+  url: http://cpu-requests-remover-webhook.cpu-requests-remover-webhook.svc:80/mutate
