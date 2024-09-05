@@ -41,3 +41,7 @@ def mutate():
 @app.route("/health", methods=["GET"])
 def health():
   return ("", http.HTTPStatus.NO_CONTENT)
+
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", debug=True)
