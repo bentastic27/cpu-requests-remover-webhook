@@ -27,13 +27,13 @@ spec:
         readinessProbe:
           httpGet:
             path: /health
-            scheme: HTTPS
+            scheme: HTTP
             port: 80
           initialDelaySeconds: 3
           periodSeconds: 5
         livenessProbe:
           httpGet:
             path: /health
-            scheme: HTTPS
+            scheme: HTTP
             port: 80
           initialDelaySeconds: 3
