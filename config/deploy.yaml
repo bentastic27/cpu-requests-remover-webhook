@@ -26,6 +26,7 @@ spec:
         - containerPort: 8443
           name: https
         args:
+        - "--workers=8"
         - "--access-logfile=-"
         - "--log-file=-"
         - "--certfile=/certs/tls.crt"
