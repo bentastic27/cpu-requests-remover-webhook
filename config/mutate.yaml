@@ -8,6 +8,12 @@ webhooks:
 - name: cpu-requests-remover-webhook.cpu-requests-remover-webhook.svc
   sideEffects: NoneOnDryRun
   failurePolicy: Ignore
+  # ztunnel 1.31+ refuses to start with a zero CPU request
+  objectSelector:
+    matchExpressions:
+    - key: app.kubernetes.io/name
+      operator: NotIn
+      values: ["ztunnel"]
   admissionReviewVersions:
   - v1
   rules:
